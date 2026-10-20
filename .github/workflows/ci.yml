@@ -85,6 +85,10 @@ jobs:
   docker:
     name: Imagen Docker
     needs: test
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      packages: write
     uses: ./.github/workflows/docker.yml
     with:
       image-tag: ${{ github.sha }}
