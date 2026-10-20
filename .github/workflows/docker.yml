@@ -1,0 +1,25 @@
+name: Docker (reutilizable)
+
+on:
+  workflow_call:
+    inputs:
+      image-tag:
+        description: Etiqueta que llevará la imagen
+        required: true
+        type: string
+
+jobs:
+  imagen:
+    name: Preparar imagen
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el jar
+        uses: actions/download-artifact@v8
+        with:
+          name: app-jar
+          path: artefactos
+
+      - name: Mostrar lo recibido
+        run: |
+          echo "Etiqueta recibida: ${{ inputs.image-tag }}"
+          ls -lh artefactos
