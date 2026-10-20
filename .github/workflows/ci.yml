@@ -81,3 +81,10 @@ jobs:
 
       - name: Listar lo descargado
         run: ls -lh artefactos
+
+  docker:
+    name: Imagen Docker
+    needs: test
+    uses: ./.github/workflows/docker.yml
+    with:
+      image-tag: ${{ github.sha }}
